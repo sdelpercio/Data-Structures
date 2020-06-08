@@ -4,29 +4,53 @@ Answer the following questions for each of the data structures you implemented a
 
 1. What is the runtime complexity of `push` using a list?
 
+O(1)
+
 2. What is the runtime complexity of `push` using a linked list?
+
+O(1)
 
 3. What is the runtime complexity of `pop` using a list?
 
+O(1)
+
 4. What is the runtime complexity of `pop` using a linked list?
+
+O(1)
 
 5. What is the runtime complexity of `len` using a list?
 
+O(1)
+
 6. What is the runtime complexity of `len` using a linked list?
+
+O(1)
 
 ## Queue
 
 1. What is the runtime complexity of `enqueue` using a list?
 
+O(1)
+
 2. What is the runtime complexity of `enqueue` using a linked list?
+
+O(1)
 
 3. What is the runtime complexity of `dequeue` using a list?
 
+O(1)
+
 4. What is the runtime complexity of `dequeue` using a linked list?
+
+O(1)
 
 5. What is the runtime complexity of `len` using a list?
 
+O(1)
+
 6. What is the runtime complexity of `len` using a linked list?
+
+O(1)
 
 ## Doubly Linked List
 
@@ -54,14 +78,14 @@ Answer the following questions for each of the data structures you implemented a
 
 ## Binary Search Tree
 
-1. What is the runtime complexity of `insert`? 
+1. What is the runtime complexity of `insert`?
 
 2. What is the runtime complexity of `contains`?
 
-3. What is the runtime complexity of `get_max`? 
+3. What is the runtime complexity of `get_max`?
 
 4. What is the runtime complexity of `for_each`?
-    
+
 ## Heap
 
 1. What is the runtime complexity of `_bubble_up`?

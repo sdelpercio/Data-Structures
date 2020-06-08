@@ -9,6 +9,8 @@ return elements in Last In First Out order.
    Make sure the Stack tests pass.
 3. What is the difference between using an array vs. a linked list when
    implementing a Stack?
+   
+   If an array is used to implement the stack data structure, then the time complexity to push or pop onto the stack will be worse than if a linked list is used. A linked list will be faster because of how it allocates space for new items. However, to search through the data in a stack, it will be faster for an array than a linked list. An array has faster lookup speed because of how the processor stores nearby memory in a cache.
 """
 
 # Array Stack
