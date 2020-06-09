@@ -72,22 +72,60 @@ class DoublyLinkedList:
             self.tail = None
             return single_item
         
-        # point new head at 2nd node, set new head's prev as None
+        # remember current_head to return later
         current_head = self.head
-        self.head = current_head.next
+        
+        # point new head at 2nd node, set new head's prev as None
+        self.head = self.head.next
         self.head.prev = None
+        return current_head
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
+        # check for empty dll
+        if not self.head:
+            # create new node at head, point tail at head
+            self.head = ListNode(value)
+            self.tail = self.head
+            
+        # remember current tail
+        current_tail = self.tail
+        
+        # add new node after current tail
+        current_tail.insert_after(value)
+        
+        # reset tail to be new node
+        self.tail = current_tail.next
+        
+        # adjust previous tail's next to be new tail
+        current_tail.next = self.tail
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
     def remove_from_tail(self):
-        pass
+        # check for empty dll
+        if not self.head:
+            return None
+        
+        # check for one item in dll
+        if self.head is self.tail:
+            single_item = self.head
+            self.head = None
+            self.tail = None
+            return single_item
+        
+        # remember current tail
+        current_tail = self.tail
+        
+        # set new tail
+        self.tail = current_tail.prev
+        
+        # remove current tail
+        current_tail.delete()
+        return current_tail
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
