@@ -50,11 +50,16 @@ class DoublyLinkedList:
     def add_to_head(self, value):
         # check for empty dll
         if not self.head:
-            return None
+            self.head = ListNode(value)
+            self.tail = self.head
+            self.length += 1
         
-        # add new node before head
-        self.head.insert_before(value)
-        self.length += 1
+        else:
+            # add new node before head
+            current_head = self.head
+            current_head.insert_before(value)
+            self.head = current_head.prev
+            self.length += 1
         
 
     """Removes the List's current head node, making the
@@ -70,6 +75,7 @@ class DoublyLinkedList:
             single_item = self.head
             self.head = None
             self.tail = None
+            self.length = 0
             return single_item
         
         # remember current_head to return later
@@ -78,6 +84,8 @@ class DoublyLinkedList:
         # point new head at 2nd node, set new head's prev as None
         self.head = self.head.next
         self.head.prev = None
+        
+        self.length -= 1
         return current_head
 
     """Wraps the given value in a ListNode and inserts it 
@@ -90,17 +98,22 @@ class DoublyLinkedList:
             self.head = ListNode(value)
             self.tail = self.head
             
-        # remember current tail
-        current_tail = self.tail
-        
-        # add new node after current tail
-        current_tail.insert_after(value)
-        
-        # reset tail to be new node
-        self.tail = current_tail.next
-        
-        # adjust previous tail's next to be new tail
-        current_tail.next = self.tail
+            self.length += 1
+            
+        else: 
+            # remember current tail
+            current_tail = self.tail
+            
+            # add new node after current tail
+            current_tail.insert_after(value)
+            
+            # reset tail to be new node
+            self.tail = current_tail.next
+            
+            # adjust previous tail's next to be new tail
+            current_tail.next = self.tail
+            
+            self.length += 1
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
@@ -115,6 +128,7 @@ class DoublyLinkedList:
             single_item = self.head
             self.head = None
             self.tail = None
+            self.length = 0
             return single_item
         
         # remember current tail
@@ -125,12 +139,43 @@ class DoublyLinkedList:
         
         # remove current tail
         current_tail.delete()
+        
+        self.length -= 1
         return current_tail
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        pass
+        # check if empty dll
+        if not self.head:
+            self.head = node
+            self.length += 1
+            
+        # check if argument is current head already
+        elif self.head is node:
+            return
+            
+        # check if argument is current tail already
+        elif self.tail is node and self.head is not node:
+            # handle tail
+            current_tail = self.tail
+            self.tail = current_tail.prev
+            current_tail.delete()
+            
+            # handle new head
+            current_head = self.head
+            current_head.insert_before(node.value)
+            self.head = current_head.prev
+            
+        else:
+            # handle current node
+            node.delete()
+            
+            # handle new head
+            current_head = self.head
+            current_head.insert_before(node.value)
+            self.head = current_head.prev
+        
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
