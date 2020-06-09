@@ -36,6 +36,8 @@ Stretch: What if you could only use instances of your Stack class to implement t
 #         return self.storage.pop(0)
 
 # Linked List Queue
+import sys
+sys.path.append('./singly_linked_list')
 from singly_linked_list import LinkedList
 
 
