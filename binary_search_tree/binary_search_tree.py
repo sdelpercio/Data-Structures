@@ -1,3 +1,10 @@
+import sys
+sys.path.append('./singly_linked_list')
+from singly_linked_list import LinkedList
+from queue import Queue
+from stack import Stack
+
+
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -37,7 +44,7 @@ class BSTNode:
     # False if it does not
     def contains(self, target):
         # check if current value is target
-        if (self.value is target): return True
+        if (self.value == target): return True
     
         # if target is lesser and left node exists
         elif self.value > target and self.left: 
@@ -51,14 +58,11 @@ class BSTNode:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        # set initial node
-        current_node = self
+        # check for last node
+        if (self.right is None): return self.value
         
-        # while right node exists
-        while current_node.right is not None:
-            current_node = current_node.right
-            
-        return current_node.value
+        # if not, keep moving right
+        else: return self.right.get_max()
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
@@ -76,17 +80,60 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        # only print if left node is empty
+        if (node.left == None): print(node.value)
+        
+        # if theres a left node, recall function
+        if (node.left): node.in_order_print(node.left)
+        
+        # handle middle values
+        if (node.left and node.right): print(node.value)
+        
+        # if theres a right node, recall function
+        if (node.right): node.in_order_print(node.right)
+        
+        # otherwise if right node is empty, print
+        if (node.left and node.right == None): print(node.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        # initialize queue and pointer variable
+        bft_queue = Queue()
+        current_node = node
+        bft_queue.enqueue(current_node)
+        
+        while bft_queue.size != 0:
+            current_node = bft_queue.dequeue()
+            
+            print(current_node.value)
+            
+            if current_node.left != None:
+                bft_queue.enqueue(current_node.left)
+    
+            if current_node.right != None:
+                bft_queue.enqueue(current_node.right)     
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        # initialize stack and current node pointer
+        dft_stack = Stack()
+        current_node = node
+        dft_stack.push(current_node)
+        
+        while dft_stack.size != 0:
+            # grab node off stack
+            current_node = dft_stack.pop()
+            
+            # print current_node
+            print(current_node.value)
+            
+            if current_node.right != None:
+                dft_stack.push(current_node.right)
+                
+            if current_node.left != None:
+                dft_stack.push(current_node.left)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
